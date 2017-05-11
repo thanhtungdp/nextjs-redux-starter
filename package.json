@@ -10,6 +10,7 @@
     "dev": "node server.js",
     "build": "next build",
     "start-next": "next start -p $PORT",
-    "start": "NODE_ENV=production PORT=8000 node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "restart": "npm run build && npm run start"
   }
 }

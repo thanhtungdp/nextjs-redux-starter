@@ -1,5 +1,6 @@
 const express = require("express");
 const next = require("next");
+const config = require("./config");
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -20,9 +21,9 @@ app
       return handle(req, res);
     });
 
-    server.listen(process.env.PORT, err => {
+    server.listen(config.PORT_SERVER, err => {
       if (err) throw err;
-      console.log("> Ready on http://localhost:" + process.env.PORT);
+      console.log("> Ready on http://localhost:" + config.PORT_SERVER);
     });
   })
   .catch(ex => {
