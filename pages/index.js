@@ -1,42 +1,37 @@
-import Link from 'next/link';
-import Head from 'next/head';
-import {autobind} from 'core-decorators';
+import Link from "next/link";
+import Head from "next/head";
 import Layout from "../components/Layout";
-import fetch from 'isomorphic-unfetch'
+import fetch from "isomorphic-unfetch";
+import { changeTitle } from "../redux/actions/movieActions";
+import { nextReduxWrapper } from "../redux/connect";
 
-class Movies extends React.Component{
+@nextReduxWrapper(state => ({
+  movie: state.movie
+}))
+export default class Index extends React.Component {
+  static getInitialProps = async function({ store, isServer }) {
+    if (isServer) {
+      const res = await fetch(`http://www.omdbapi.com/?i=tt2975590`);
+      const data = await res.json();
+      store.dispatch(changeTitle(data.Title));
+    } else {
+      store.dispatch(changeTitle("Ngon do"));
+    }
+    return {};
+  };
 
-}
-
-@autobind
-export default class Index extends React.Component{
-	static getInitialProps = async function() {
-		const res = await fetch('http://www.omdbapi.com/?s=batman')
-		const data = await res.json()
-
-		console.log(`Movie data fetched. Count: ${data.Search.length}`)
-
-		return {
-			movies: data.Search
-		}
-	}
-
-	render(){
-		return <Layout>
-			<Head>
-				<title>Danh sach ne hay qua</title>
-				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-			</Head>
-			<h1>Batman Movies</h1>
-			<ul>
-				{this.props.movies.map((movie) => (
-					<li key={movie.imdbID}>
-						<Link as={`/p/${movie.imdbID}`} href={`/post?id=${movie.imdbID}`}>
-							<a>{movie.Title}</a>
-						</Link>
-					</li>
-				))}
-			</ul>
-		</Layout>
-	}
+  render() {
+    return (
+      <Layout>
+        <Head>
+          <title>{this.props.movie.title}</title>
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
+        </Head>
+        <h1>{this.props.movie.title}</h1>
+      </Layout>
+    );
+  }
 }
