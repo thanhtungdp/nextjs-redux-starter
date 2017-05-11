@@ -6,19 +6,28 @@ Feature from next.js:
 * Best for pageSpeed google
 * Support hot loading
 
+## View [demo](https://nextjs-mwmkkomeno.now.sh/)
+
 ## Installation
-```nginx
+```
 git clone https://github.com/tungtung-dev/nextjs-redux-starter.git
 cd nextjs-redux-starter && yarn install (or npm install)
-npm run dev # dev => open http://localhost:6789
-npm run build # build product
-npm run start # start production after build
-npm run restart # rebuild and restart production
+
+npm run dev 
+# open http://localhost:6789
+
+npm run build
+# build product
+
+npm run start 
+# start production after build
+
+npm run restart 
+# rebuild and restart production
 ```
 
 ### Structure
-```nginx
-Root
+```
 ├── api
 ├── components
 ├── pages
@@ -35,3 +44,9 @@ Root
 ├── server.js
 └── config.js
 ```
+
+## Documents
+* [Next.js](https://github.com/zeit/next.js)
+* [Learn Next.js](http://learnnextjs.com)
+* [Redux offical docs](http://redux.js.org/)
+* [Redux example es6](https://github.com/yildizberkay/redux-example) 
