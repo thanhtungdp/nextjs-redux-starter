@@ -7,7 +7,7 @@ const getHeaders = () => {
   if (typeof localStorage !== "undefined") {
     headers = {
       ...headers,
-      Authorization: "auth here"
+      // Authorization: "auth here"
     };
   }
   return headers;

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "axios": "^0.16.1",
+    "babel-plugin-module-resolver": "^2.7.0",
     "core-decorators": "^0.18.0",
     "express": "^4.15.2",
     "isomorphic-unfetch": "^1.0.0",

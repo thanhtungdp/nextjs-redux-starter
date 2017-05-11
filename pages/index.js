@@ -1,36 +1,48 @@
 import Link from "next/link";
 import Head from "next/head";
-import Layout from "../components/Layout";
-import fetch from "isomorphic-unfetch";
-import { changeTitle } from "../redux/actions/movieActions";
-import { nextReduxWrapper } from "../redux/connect";
+import Layout from "components/Layout";
+import { getMovies } from "redux/actions/movieActions";
+import { nextReduxWrapper } from "redux/connect";
+import { waitLoadSuccessData } from "utils/await";
+
+const Movie = ({ Title, imdbID }) => (
+  <li>
+    <Link as={`/movie/${imdbID}`} href={`/movie?id=${imdbID}`}>
+      <a>
+        {Title}
+      </a>
+    </Link>
+  </li>
+);
 
 @nextReduxWrapper(state => ({
-  movie: state.movie
+  movies: state.movie.lists
 }))
 export default class Index extends React.Component {
   static getInitialProps = async function({ store, isServer }) {
     if (isServer) {
-      const res = await fetch(`http://www.omdbapi.com/?i=tt2975590`);
-      const data = await res.json();
-      store.dispatch(changeTitle(data.Title));
+      store.dispatch(getMovies());
+      await waitLoadSuccessData(store, "getMovies");
     } else {
-      store.dispatch(changeTitle("Ngon do"));
+      store.dispatch(getMovies());
     }
-    return {};
   };
 
   render() {
     return (
       <Layout>
         <Head>
-          <title>{this.props.movie.title}</title>
+          <title>Movie lists</title>
           <meta
             name="viewport"
             content="initial-scale=1.0, width=device-width"
           />
         </Head>
-        <h1>{this.props.movie.title}</h1>
+        <ul>
+          {this.props.movies.map(movie => (
+            <Movie {...movie} key={movie.imdbID} />
+          ))}
+        </ul>
       </Layout>
     );
   }

@@ -1,21 +1,31 @@
-import { CHANGE_TITLE } from "../actions/movieActions";
+import { GET_MOVIE, GET_MOVIES } from "../actions/movieActions";
 
 const initialState = {
-  title: "Phim hay qua"
+  lists: [],
+  current: {}
 };
 
 export default function createReducer(state = initialState, action) {
   switch (action.type) {
-    case CHANGE_TITLE:
-      return changeTitle(state, action);
+    case GET_MOVIES:
+      return getMovies(state, action);
+    case GET_MOVIE:
+      return getMovie(state, action);
     default:
       return state;
   }
 }
 
-export function changeTitle(state, { title }) {
+export function getMovie(state, action ) {
+	return {
+		...state,
+		current: action.payload.getMovie
+	};
+}
+
+export function getMovies(state, action ) {
   return {
     ...state,
-    title
+    lists: action.payload.getMovies.Search
   };
 }
