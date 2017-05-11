@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "next start -p $PORT"
+    "start-next": "next start -p $PORT",
+    "start": "NODE_ENV=production PORT=8000 node server.js"
   }
 }
