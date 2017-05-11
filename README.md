@@ -32,7 +32,7 @@ npm run restart
 ├── components
 ├── pages
 |	├── index.js (Movie lists)
-|	├── index.js (View movie)
+|	├── movie.js (View movie)
 ├── utils
 ├── redux
 |	├── actions
