@@ -4,6 +4,7 @@ import Layout from "components/Layout";
 import { getMovies } from "redux/actions/movieActions";
 import { nextReduxWrapper } from "redux/connect";
 import { waitLoadSuccessData } from "utils/await";
+import payload from "constants/payload";
 
 const Movie = ({ Title, imdbID }) => (
   <li>
@@ -22,7 +23,7 @@ export default class Index extends React.Component {
   static getInitialProps = async function({ store, isServer }) {
     if (isServer) {
       store.dispatch(getMovies());
-      await waitLoadSuccessData(store, "getMovies");
+      await waitLoadSuccessData(store, payload.GET_MOVIES);
     } else {
       store.dispatch(getMovies());
     }

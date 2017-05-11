@@ -1,4 +1,5 @@
 import { GET_MOVIE, GET_MOVIES } from "../actions/movieActions";
+import payload from 'constants/payload';
 
 const initialState = {
   lists: [],
@@ -19,13 +20,13 @@ export default function createReducer(state = initialState, action) {
 export function getMovie(state, action ) {
 	return {
 		...state,
-		current: action.payload.getMovie
+		current: action.payload[payload.GET_MOVIE]
 	};
 }
 
 export function getMovies(state, action ) {
   return {
     ...state,
-    lists: action.payload.getMovies.Search
+    lists: action.payload[payload.GET_MOVIES].Search
   };
 }
